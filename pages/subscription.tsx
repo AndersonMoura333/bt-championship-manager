@@ -11,6 +11,7 @@ export default function Subscription() {
   const [athleteName, setAthleteName] = useState("");
   const [athleteEmail, setAthleteEmail] = useState("");
   const [athlete2Name, setAthlete2Name] = useState("");
+  const [athleteImage, setAthleteImage] = useState("");
 
   async function onSubmit() {
     try {
@@ -75,6 +76,16 @@ export default function Subscription() {
               className="bg-[#6EA8F7]/30 rounded-md p-2"
               onChange={(e) => setAthleteEmail(e.target.value)}
               value={athleteEmail}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="">Foto</label>
+            <input
+              type="file"
+              placeholder="Início"
+              className="bg-[#6EA8F7]/30 rounded-md p-2"
+              onChange={(e) => setAthleteImage(e.target.value)}
+              value={athleteImage}
             />
           </div>
           <div className="flex justify-center col-span-2">

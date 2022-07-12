@@ -14,6 +14,7 @@ export default  function Register(){
   const [type, setType] = useState("spectator");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+  const [userImageProfile, setUserImageProfile] = useState("");
 
   async function onSubmit() {
     if (confirmPassword != password) {
@@ -25,6 +26,11 @@ export default  function Register(){
       const response = await API.post("/auth/register", {
         username, password, email, type, gender: ""
       });
+
+      const {id} = response.data;
+      console.log(id);
+
+      const responseImage = await API.post(`/upload&id=${id}`, userImageProfile)
       console.log(response);
       if (response.status === 201) {
         Swal.fire({
@@ -42,7 +48,7 @@ export default  function Register(){
   };
   return (
     <Guest>
-      <div className="flex flex-col items-stretch justify-between h-screen overflow-y-hidden text-lg">
+      <div className="flex flex-col items-stretch justify-between h-screen overflow-y-scroll text-lg">
         <div className="grid w-full min-h-full grid-cols-5">
           <div className="bg-[#F7BC6D] w-full h-full hidden md:flex flex-col justify-center items-center sm:col-span-2 md:col-span-3">
             <div className="text-3xl font-semibold"> Bem-vindo(a)</div>
@@ -116,6 +122,17 @@ export default  function Register(){
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="p-1 border drop-shadow-lg border-1"
+                />
+              </div>
+              <div className="flex flex-col w-full p-4 space-y-1">
+                <label className="" htmlFor="">
+                  Foto
+                </label>
+                <input
+                  value={userImageProfile}
+                  onChange={(e)=>setUserImageProfile(e.target.value)}
+                  type="file"
                   className="p-1 border drop-shadow-lg border-1"
                 />
               </div>
